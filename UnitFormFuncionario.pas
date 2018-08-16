@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnitFormPadrao, Vcl.ExtCtrls,
-  Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ToolWin;
+  Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ToolWin, UnitFormDatabaseController;
 
 type
   TFormFuncionario = class(TFormPadrao)
@@ -18,6 +18,7 @@ type
     Label3: TLabel;
     Label4: TLabel;
     procedure Button4Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,6 +41,7 @@ type
 
 var
   FormFuncionario: TFormFuncionario;
+  DatabaseController: TDatabaseController;
 
 implementation
 
@@ -61,11 +63,17 @@ begin
            wCodDepto := strtoint(edCodDepto.Text);
            wDataAdmissao := datetostr(dtDataAdmissao.Date);
          end;
-       wDatabaseController.Inserir(wFuncionario, TFuncionario);
+       DatabaseController.Inserir(wFuncionario, TFuncionario);
      end;
      {ShowMessage(inttostr(wFuncionario.wCod)+wFuncionario.wNome+inttostr(wFuncionario.wCodDepto)+wFuncionario.wDataAdmissao);}
 
 
+end;
+
+procedure TFormFuncionario.FormCreate(Sender: TObject);
+begin
+  inherited;
+  DatabaseController := TDatabaseController.Create;
 end;
 
 end.

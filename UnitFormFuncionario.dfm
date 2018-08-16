@@ -2,6 +2,7 @@ inherited FormFuncionario: TFormFuncionario
   Left = 32
   Caption = 'FormFuncionario'
   Position = poDesigned
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 10
   inherited ToolBar1: TToolBar
