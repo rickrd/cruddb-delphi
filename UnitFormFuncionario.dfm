@@ -8,6 +8,9 @@ inherited FormFuncionario: TFormFuncionario
     ExplicitLeft = 0
     ExplicitTop = 0
     ExplicitWidth = 505
+    inherited Button4: TButton
+      OnClick = Button4Click
+    end
   end
   inherited StatusBar1: TStatusBar
     ExplicitLeft = 0

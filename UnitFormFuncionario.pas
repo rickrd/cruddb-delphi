@@ -17,6 +17,7 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
+    procedure Button4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,7 +35,7 @@ type
     property wCod: integer read wpCod write wpCod;
     property wNome: string read wpNome write wpNome;
     property wCodDepto: integer read wpCodDepto write wpCodDepto;
-    property wDataAdmissao: string read wpDataAdmissao write wpDataAmissao;
+    property wDataAdmissao: string read wpDataAdmissao write wpDataAdmissao;
   end;
 
 var
@@ -43,5 +44,28 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFormFuncionario.Button4Click(Sender: TObject);
+var
+  wFuncionario: TFuncionario;
+  wIndex: integer;
+begin
+  inherited;
+  wFuncionario := TFuncionario.Create;
+  if trystrtoint(edCod.Text, wIndex) and trystrtoint (edCodDepto.Text, wIndex) then
+     begin
+       with wFuncionario do
+         begin
+           wCod := strtoint(edCod.Text);
+           wNome := edNome.Text;
+           wCodDepto := strtoint(edCodDepto.Text);
+           wDataAdmissao := datetostr(dtDataAdmissao.Date);
+         end;
+       wDatabaseController.Inserir(wFuncionario, TFuncionario);
+     end;
+     {ShowMessage(inttostr(wFuncionario.wCod)+wFuncionario.wNome+inttostr(wFuncionario.wCodDepto)+wFuncionario.wDataAdmissao);}
+
+
+end;
 
 end.
