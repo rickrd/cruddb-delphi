@@ -1,0 +1,21 @@
+inherited FormPadrao1: TFormPadrao1
+  Caption = 'FormFuncionario'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited ToolBar1: TToolBar
+    ExplicitLeft = 0
+    ExplicitTop = 0
+    ExplicitWidth = 505
+  end
+  inherited StatusBar1: TStatusBar
+    ExplicitLeft = 0
+    ExplicitTop = 212
+    ExplicitWidth = 505
+  end
+  inherited Panel1: TPanel
+    ExplicitLeft = 0
+    ExplicitTop = 29
+    ExplicitWidth = 505
+    ExplicitHeight = 183
+  end
+end

@@ -34,7 +34,6 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
-    procedure FormCreate(Sender: TObject);
     procedure btAdicionarClick(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -44,26 +43,23 @@ type
     { Public declarations }
   end;
 
-  ListaFuncionarios = class (TObjectList)
-  private
-
-  public
-  end;
-
 var
   Form1: TForm1;
-  FListaFuncionarios: ListaFuncionarios;
-  wFuncionario: TFuncionario;
 implementation
 {$R *.dfm}
 
 procedure TForm1.btAdicionarClick(Sender: TObject);
+var
+  wFuncionario: TFuncionario;
 begin
   wFuncionario := TFuncionario.Create;
-  wFuncionario.wCod := StrToInt(edCod.Text);
-  wFuncionario.wNome := edNome.Text;
-  wFuncionario.wDeptoCod := StrToInt(edDeptoCod.Text);
-  wFuncionario.wDataAdmissao := edDataAdmissao.Text;
+  with wFuncionario do
+    begin
+      wCod := StrToInt(edCod.Text);
+      wNome := edNome.Text;
+      wDeptoCod := StrToInt(edDeptoCod.Text);
+      wDataAdmissao := edDataAdmissao.Text;
+    end;
   try
     IBQuery1.SQL.Text := 'INSERT INTO funcionario VALUES ('+IntToStr(wFuncionario.wCod)+', '+quotedstr(wFuncionario.wNome)+', '+IntToStr(wFuncionario.wDeptoCod)+', '+quotedstr(wFuncionario.wDataAdmissao)+');';
   except
@@ -98,11 +94,6 @@ end;
 procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   IBTransaction1.Commit;
-end;
-
-procedure TForm1.FormCreate(Sender: TObject);
-begin
-  FListaFuncionarios := ListaFuncionarios.Create;
 end;
 
 end.
