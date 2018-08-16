@@ -21,6 +21,20 @@ object FormDatabaseController: TFormDatabaseController
     ParamCheck = True
     Left = 368
     Top = 184
+    object IBQuery1wCod: TIntegerField
+      FieldName = 'wCod'
+    end
+    object IBQuery1wNome: TWideStringField
+      FieldName = 'wNome'
+      Size = 50
+    end
+    object IBQuery1wCodDepto: TIntegerField
+      FieldName = 'wCodDepto'
+    end
+    object IBQuery1wDataAdmissao: TWideStringField
+      FieldName = 'wDataAdmissao'
+      Size = 50
+    end
   end
   object IBDatabase1: TIBDatabase
     DatabaseName = 'C:\Program Files\Firebird\Firebird_2_5\examples\CRUDDB.FDB'

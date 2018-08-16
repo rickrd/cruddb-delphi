@@ -19,6 +19,7 @@ type
     Label4: TLabel;
     procedure Button4Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -46,6 +47,19 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFormFuncionario.Button3Click(Sender: TObject);
+var
+  wIndex: string;
+  wObj: TObject;
+  wObj2: TFuncionario;
+begin
+  inherited;
+  if inputquery('Busca por codigo', 'Insira o código do funcionario:', wIndex) then
+     wObj := DatabaseController.getByCod(strtoint(wIndex), TFuncionario);
+  with wObj as TFuncionario do
+    Showmessage(wNome);
+end;
 
 procedure TFormFuncionario.Button4Click(Sender: TObject);
 var

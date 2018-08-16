@@ -3,13 +3,19 @@ program Project1;
 uses
   Vcl.Forms,
   UnitFuncionario in 'UnitFuncionario.pas',
-  UnitfrFuncionario in 'UnitfrFuncionario.pas' {Form1};
+  UnitfrFuncionario in 'UnitfrFuncionario.pas' {Form1},
+  UnitFormPadrao in 'UnitFormPadrao.pas' {FormPadrao},
+  UnitFormFuncionario in 'UnitFormFuncionario.pas' {FormFuncionario},
+  UnitFormSplash in 'UnitFormSplash.pas' {FormSplash},
+  UnitFormDatabaseController in 'UnitFormDatabaseController.pas' {FormDatabaseController};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TFormSplash, FormSplash);
+  Application.CreateForm(TFormFuncionario, FormFuncionario);
+  Application.CreateForm(TFormDatabaseController, FormDatabaseController);
   Application.Run;
 end.

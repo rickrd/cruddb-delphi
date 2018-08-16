@@ -1,89 +1,111 @@
 inherited FormFuncionario: TFormFuncionario
   Left = 32
   Caption = 'FormFuncionario'
+  ClientHeight = 240
+  ClientWidth = 451
   Position = poDesigned
   OnCreate = FormCreate
+  ExplicitWidth = 467
+  ExplicitHeight = 279
   PixelsPerInch = 96
   TextHeight = 10
   inherited ToolBar1: TToolBar
+    Width = 451
     ExplicitLeft = 0
     ExplicitTop = 0
     ExplicitWidth = 505
+    inherited btBuscar: TButton
+      OnClick = Button3Click
+    end
     inherited Button4: TButton
       OnClick = Button4Click
     end
   end
   inherited StatusBar1: TStatusBar
+    Top = 221
+    Width = 451
     ExplicitLeft = 0
     ExplicitTop = 212
     ExplicitWidth = 505
   end
   inherited Panel1: TPanel
+    Width = 451
+    Height = 192
     ExplicitLeft = 150
     ExplicitTop = 229
     ExplicitWidth = 377
     ExplicitHeight = 183
     object Label1: TLabel
-      Left = 34
-      Top = 22
+      Left = 49
+      Top = 26
       Width = 26
       Height = 15
+      Anchors = []
       Caption = 'C'#243'digo:'
     end
     object Label2: TLabel
-      Left = 37
-      Top = 43
+      Left = 52
+      Top = 48
       Width = 23
       Height = 10
+      Anchors = []
       Caption = 'Nome:'
     end
     object Label3: TLabel
-      Left = 20
-      Top = 70
+      Left = 35
+      Top = 77
       Width = 40
       Height = 10
+      Anchors = []
       Caption = 'Cod.Depto.:'
     end
     object Label4: TLabel
-      Left = 23
-      Top = 93
+      Left = 38
+      Top = 101
       Width = 37
       Height = 10
+      Anchors = []
       Caption = 'Admissao:'
     end
     object edCod: TEdit
-      Left = 75
-      Top = 16
+      Left = 97
+      Top = 17
       Width = 75
       Height = 18
       Anchors = []
       TabOrder = 0
+      ExplicitLeft = 75
+      ExplicitTop = 16
     end
     object edNome: TEdit
-      Left = 75
-      Top = 40
-      Width = 150
+      Left = 97
+      Top = 42
+      Width = 75
       Height = 18
       Anchors = []
       TabOrder = 1
     end
     object edCodDepto: TEdit
-      Left = 75
-      Top = 64
+      Left = 97
+      Top = 68
       Width = 75
       Height = 18
       Anchors = []
       TabOrder = 2
+      ExplicitLeft = 75
+      ExplicitTop = 64
     end
     object dtDataAdmissao: TDateTimePicker
-      Left = 75
-      Top = 88
+      Left = 97
+      Top = 93
       Width = 75
       Height = 18
       Anchors = []
       Date = 43328.491908333330000000
       Time = 43328.491908333330000000
       TabOrder = 3
+      ExplicitLeft = 75
+      ExplicitTop = 88
     end
   end
 end
