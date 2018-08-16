@@ -80,13 +80,17 @@ end;
 procedure TForm1.btBuscarClick(Sender: TObject);
 var
   Index: string;
+  wIndex: integer;
 begin
   if InputQuery('Buscar funcionario', 'Insira o índice do funcionario a ser buscado:', Index) then
      begin
-       IBDataSet1.SelectSQL.Text := 'SELECT wNome FROM funcionario WHERE wCod LIKE '+Index+';';
-       ShowMessage(IBDataSet1.SelectSQL.Text);
-       IBDataSet1.Open;
-       ShowMessage('Value: '+IBDataSet1.Fields[0].AsString);
+       if trystrtoint(Index, wIndex) then
+          begin
+            IBDataSet1.SelectSQL.Text := 'SELECT wNome FROM funcionario WHERE wCod LIKE '+Index+';';
+            ShowMessage(IBDataSet1.SelectSQL.Text);
+            IBDataSet1.Open;
+            ShowMessage('Value: '+IBDataSet1.Fields[0].AsString);
+          end;
      end;
   IBQuery1.Close;
 end;
