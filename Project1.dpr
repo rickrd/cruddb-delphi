@@ -7,7 +7,8 @@ uses
   UnitFormPadrao in 'UnitFormPadrao.pas' {FormPadrao},
   UnitFormFuncionario in 'UnitFormFuncionario.pas' {FormFuncionario},
   UnitFormSplash in 'UnitFormSplash.pas' {FormSplash},
-  UnitFormDatabaseController in 'UnitFormDatabaseController.pas' {FormDatabaseController};
+  UnitFormDatabaseController in 'UnitFormDatabaseController.pas' {FormDatabaseController},
+  UnitFormGrid in 'UnitFormGrid.pas' {FormGrid};
 
 {$R *.res}
 
@@ -17,5 +18,6 @@ begin
   Application.CreateForm(TFormSplash, FormSplash);
   Application.CreateForm(TFormFuncionario, FormFuncionario);
   Application.CreateForm(TFormDatabaseController, FormDatabaseController);
+  Application.CreateForm(TFormGrid, FormGrid);
   Application.Run;
 end.

@@ -12,11 +12,12 @@ type
     ToolBar1: TToolBar;
     StatusBar1: TStatusBar;
     Panel1: TPanel;
-    Button1: TButton;
+    btAnterior: TButton;
     Button2: TButton;
-    Button3: TButton;
+    btBuscar: TButton;
     Button4: TButton;
     Button5: TButton;
+    Button6: TButton;
   private
     { Private declarations }
   public

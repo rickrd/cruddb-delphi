@@ -2,8 +2,8 @@ object FormPadrao: TFormPadrao
   Left = 0
   Top = 0
   Caption = 'FormPadrao'
-  ClientHeight = 231
-  ClientWidth = 377
+  ClientHeight = 238
+  ClientWidth = 450
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,14 +18,14 @@ object FormPadrao: TFormPadrao
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 377
+    Width = 450
     Height = 29
     Caption = 'ToolBar1'
     TabOrder = 0
     ExplicitLeft = 272
     ExplicitTop = 104
     ExplicitWidth = 150
-    object Button1: TButton
+    object btAnterior: TButton
       Left = 0
       Top = 0
       Width = 75
@@ -41,7 +41,7 @@ object FormPadrao: TFormPadrao
       Caption = '>'
       TabOrder = 1
     end
-    object Button3: TButton
+    object btBuscar: TButton
       Left = 150
       Top = 0
       Width = 75
@@ -65,11 +65,19 @@ object FormPadrao: TFormPadrao
       Caption = 'Excluir'
       TabOrder = 4
     end
+    object Button6: TButton
+      Left = 375
+      Top = 0
+      Width = 75
+      Height = 22
+      Caption = 'Button6'
+      TabOrder = 5
+    end
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 212
-    Width = 377
+    Top = 219
+    Width = 450
     Height = 19
     Panels = <>
     ExplicitLeft = 112
@@ -79,8 +87,8 @@ object FormPadrao: TFormPadrao
   object Panel1: TPanel
     Left = 0
     Top = 29
-    Width = 377
-    Height = 183
+    Width = 450
+    Height = 190
     Align = alClient
     TabOrder = 2
     ExplicitLeft = 208

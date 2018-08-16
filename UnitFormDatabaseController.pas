@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, IBX.IBDatabase, Data.DB,
-  IBX.IBCustomDataSet, IBX.IBQuery;
+  IBX.IBCustomDataSet, IBX.IBQuery, System.Contnrs;
 
 type
   TFormDatabaseController = class(TForm)
@@ -28,6 +28,7 @@ type
   public
     procedure Inserir(Objeto: TObject; Classe: TClass);
     function getByCod(Cod: integer; Classe: TClass): TObject;
+    function getAllBySearchSql(SearchSQL: string; Classe: TClass): TObjectList;
   end;
 
 var
@@ -38,6 +39,23 @@ var
 implementation
 {$R *.dfm}
 uses UnitFormFuncionario;
+
+
+function TDatabaseController.getAllBySearchSql(SearchSQL: string; Classe: TClass): TObjectList;
+var
+  wObjList: TObjectList;
+  wCont: Integer;
+  wObj: TObject;
+begin
+  wClasse := Classe;
+  wObj := wClasse.Create;
+  wObjList := TObjectList.Create;
+  FormDatabaseController.IBQuery1.SQL.Text := SearchSQL;
+  FormDatabaseController.IBQuery1.Open;
+  for wCont := 0 to FormDatabaseController.IBQuery1.FieldCount-1 do
+    // falta
+
+end;
 
 function TDatabaseController.getByCod(Cod: Integer; Classe: TClass): TObject;
 var
