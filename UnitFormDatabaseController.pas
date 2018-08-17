@@ -30,6 +30,7 @@ type
     function getByCod(Cod: integer; Classe: TClass): TObject;
     function getAllBySearchSql(SearchSQL: string; Classe: TClass): TObjectList;
     function getAllByTableName (Table: string; Classe: TClass): TObjectList;
+    procedure deleteByCod (Cod: integer; Classe: TClass);
     constructor Create();
   end;
 
@@ -41,6 +42,23 @@ var
 implementation
 {$R *.dfm}
 uses UnitFormFuncionario;
+
+procedure TDatabaseController.deleteByCod(Cod: Integer; Classe: TClass);
+var
+  wDeleteSQL: string;
+begin
+  if Classe = TFuncionario then
+     try
+     wDeleteSQL := format('DELETE FROM funcionario WHERE wCod LIKE %d', [Cod]);
+     FormDatabaseController.IBQuery1.SQL.Text := wDeleteSQL;
+     FormDatabaseController.IBQuery1.Open;
+     finally
+       ShowMessage('Sucesso!');
+       FormDatabaseController.IBQuery1.Close;
+       FormDatabaseController.IBQuery1.ExecSQL;
+       FormDatabaseController.IBTransaction1.CommitRetaining;
+     end;
+end;
 
 constructor TDatabaseController.Create;
 begin
@@ -75,7 +93,7 @@ begin
   FormDatabaseController.IBQuery1.Close;
 end;
 
-function TDatabaseController.getAllByTablename(Table: string; Classe: TClass): TObjectList;
+function TDatabaseController.getAllByTableName(Table: string; Classe: TClass): TObjectList;
 var
   wObjList: TObjectList;
   wCont: Integer;
@@ -84,8 +102,7 @@ var
 begin
   wClasse := Classe;
   wObjList := TObjectList.Create;
-
-  // condição para cada tipode classe existente
+  // condição por classe
   if wClasse = TFuncionario then
      begin
        wSearchSQL := 'SELECT * FROM funcionario ORDER BY wCod';
@@ -106,7 +123,6 @@ begin
            FormDatabaseController.IBQuery1.Next;
          end;
      end;
-
   Result := wObjList;
   FormDatabaseController.IBQuery1.Close;
 end;
@@ -137,7 +153,6 @@ var
          Result := wObj;
          FormDatabaseController.IBQuery1.Close;
        end;
-
      end;
   end;
 
@@ -156,7 +171,6 @@ var
     finally
       ShowMessage('Success');
     end;
-
   end;
 
 end.

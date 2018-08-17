@@ -21,6 +21,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
     procedure Button6Click(Sender: TObject);
+    procedure btExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -59,6 +60,22 @@ begin
   FormGrid.geraGrid(TFuncionario);
 end;
 
+procedure TFormFuncionario.btExcluirClick(Sender: TObject);
+var
+  wIndex: integer;
+begin
+  inherited;
+  if trystrtoint(edCod.Text, wIndex) then
+     try
+       DatabaseController.deleteByCod(strtoint(edCod.Text), TFuncionario);
+     finally
+       edCod.Clear;
+       ednome.Clear;
+       edCodDepto.Clear;
+     end;
+
+end;
+
 procedure TFormFuncionario.btInserirClick(Sender: TObject);
 var
   wFuncionario: TFuncionario;
@@ -77,9 +94,6 @@ begin
          end;
        DatabaseController.Inserir(wFuncionario, TFuncionario);
      end;
-     {ShowMessage(inttostr(wFuncionario.wCod)+wFuncionario.wNome+inttostr(wFuncionario.wCodDepto)+wFuncionario.wDataAdmissao);}
-
-
 end;
 
 procedure TFormFuncionario.Button6Click(Sender: TObject);

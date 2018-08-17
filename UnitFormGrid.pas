@@ -4,11 +4,15 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids, UnitFormDatabaseController, System.Contnrs;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids, UnitFormDatabaseController, System.Contnrs,
+  Vcl.StdCtrls, Vcl.ToolWin, Vcl.ComCtrls;
 
 type
   TFormGrid = class(TForm)
     StringGrid1: TStringGrid;
+    ToolBar1: TToolBar;
+    btExcluir: TButton;
+    btEscolher: TButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }

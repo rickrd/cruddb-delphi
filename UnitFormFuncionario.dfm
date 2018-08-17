@@ -18,6 +18,9 @@ inherited FormFuncionario: TFormFuncionario
     inherited btInserir: TButton
       OnClick = btInserirClick
     end
+    inherited btExcluir: TButton
+      OnClick = btExcluirClick
+    end
   end
   inherited StatusBar1: TStatusBar
     Top = 221
