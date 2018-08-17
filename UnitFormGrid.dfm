@@ -3,51 +3,25 @@ object FormGrid: TFormGrid
   Top = 0
   Caption = 'FormGrid'
   ClientHeight = 237
-  ClientWidth = 281
+  ClientWidth = 349
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  FormStyle = fsMDIChild
   OldCreateOrder = False
+  Visible = True
   PixelsPerInch = 96
   TextHeight = 13
-  object DBGrid1: TDBGrid
+  object StringGrid1: TStringGrid
     Left = 0
-    Top = 0
-    Width = 281
-    Height = 233
+    Top = 8
+    Width = 273
+    Height = 120
+    ColCount = 4
+    RowCount = 10
     TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'C'#243'digo'
-        Width = 41
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'Nome'
-        Width = 74
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'C'#243'digo Depto.'
-        Width = 72
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'Data Admiss'#227'o'
-        Width = 75
-        Visible = True
-      end>
   end
 end

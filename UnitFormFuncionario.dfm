@@ -13,33 +13,36 @@ inherited FormFuncionario: TFormFuncionario
     Width = 451
     ExplicitLeft = 0
     ExplicitTop = 0
-    ExplicitWidth = 505
+    ExplicitWidth = 451
     inherited btBuscar: TButton
       OnClick = Button3Click
     end
     inherited Button4: TButton
       OnClick = Button4Click
     end
+    inherited Button6: TButton
+      OnClick = Button6Click
+    end
   end
   inherited StatusBar1: TStatusBar
     Top = 221
     Width = 451
     ExplicitLeft = 0
-    ExplicitTop = 212
-    ExplicitWidth = 505
+    ExplicitTop = 221
+    ExplicitWidth = 451
   end
   inherited Panel1: TPanel
     Width = 451
     Height = 192
-    ExplicitLeft = 150
-    ExplicitTop = 229
-    ExplicitWidth = 377
-    ExplicitHeight = 183
+    ExplicitLeft = 0
+    ExplicitTop = 29
+    ExplicitWidth = 451
+    ExplicitHeight = 192
     object Label1: TLabel
       Left = 49
       Top = 26
       Width = 26
-      Height = 15
+      Height = 10
       Anchors = []
       Caption = 'C'#243'digo:'
     end
@@ -74,8 +77,6 @@ inherited FormFuncionario: TFormFuncionario
       Height = 18
       Anchors = []
       TabOrder = 0
-      ExplicitLeft = 75
-      ExplicitTop = 16
     end
     object edNome: TEdit
       Left = 97
@@ -92,8 +93,6 @@ inherited FormFuncionario: TFormFuncionario
       Height = 18
       Anchors = []
       TabOrder = 2
-      ExplicitLeft = 75
-      ExplicitTop = 64
     end
     object dtDataAdmissao: TDateTimePicker
       Left = 97
@@ -104,8 +103,6 @@ inherited FormFuncionario: TFormFuncionario
       Date = 43328.491908333330000000
       Time = 43328.491908333330000000
       TabOrder = 3
-      ExplicitLeft = 75
-      ExplicitTop = 88
     end
   end
 end

@@ -48,12 +48,28 @@ var
   wObj: TObject;
 begin
   wClasse := Classe;
-  wObj := wClasse.Create;
   wObjList := TObjectList.Create;
   FormDatabaseController.IBQuery1.SQL.Text := SearchSQL;
   FormDatabaseController.IBQuery1.Open;
-  for wCont := 0 to FormDatabaseController.IBQuery1.FieldCount-1 do
+  FormDatabaseController.IBTransaction1.CommitRetaining;
+  {for wCont := 0 to FormDatabaseController.IBQuery1.FieldCount-1 do}
     // falta
+  ShowMessage(inttostr(FormDatabaseController.IBQuery1.FieldCount));
+  while not FormDatabaseController.IBQuery1.Eof do
+    begin
+      wObj := wClasse.Create;
+      with wObj as TFuncionario do
+        begin
+          wCod := FormDatabaseController.IBQuery1.Fields[0].AsInteger;
+          wNome := FormDatabaseController.IBQuery1.Fields[1].AsString;
+          wCodDepto := FormDatabaseController.IBQuery1.Fields[2].AsInteger;
+          wDataAdmissao := FormDatabaseController.IBQuery1.Fields[3].AsString;
+        end;
+      wObjList.Add(wObj);
+      FormDatabaseController.IBQuery1.Next;
+    end;
+  Result := wObjList;
+  FormDatabaseController.IBQuery1.Close;
 
 end;
 
