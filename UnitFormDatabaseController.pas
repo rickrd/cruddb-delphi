@@ -29,6 +29,8 @@ type
     procedure Inserir(Objeto: TObject; Classe: TClass);
     function getByCod(Cod: integer; Classe: TClass): TObject;
     function getAllBySearchSql(SearchSQL: string; Classe: TClass): TObjectList;
+    function getAllByTableName (Table: string; Classe: TClass): TObjectList;
+    constructor Create();
   end;
 
 var
@@ -40,6 +42,10 @@ implementation
 {$R *.dfm}
 uses UnitFormFuncionario;
 
+constructor TDatabaseController.Create;
+begin
+  FormDatabaseController := TFormDatabaseController.Create(nil);
+end;
 
 function TDatabaseController.getAllBySearchSql(SearchSQL: string; Classe: TClass): TObjectList;
 var
@@ -51,10 +57,7 @@ begin
   wObjList := TObjectList.Create;
   FormDatabaseController.IBQuery1.SQL.Text := SearchSQL;
   FormDatabaseController.IBQuery1.Open;
-  FormDatabaseController.IBTransaction1.CommitRetaining;
-  {for wCont := 0 to FormDatabaseController.IBQuery1.FieldCount-1 do}
-    // falta
-  ShowMessage(inttostr(FormDatabaseController.IBQuery1.FieldCount));
+  FormDatabaseController.IBQuery1.First;
   while not FormDatabaseController.IBQuery1.Eof do
     begin
       wObj := wClasse.Create;
@@ -70,7 +73,42 @@ begin
     end;
   Result := wObjList;
   FormDatabaseController.IBQuery1.Close;
+end;
 
+function TDatabaseController.getAllByTablename(Table: string; Classe: TClass): TObjectList;
+var
+  wObjList: TObjectList;
+  wCont: Integer;
+  wObj: TObject;
+  wSearchSQL: string;
+begin
+  wClasse := Classe;
+  wObjList := TObjectList.Create;
+
+  // condição para cada tipode classe existente
+  if wClasse = TFuncionario then
+     begin
+       wSearchSQL := 'SELECT * FROM funcionario ORDER BY wCod';
+       FormDatabaseController.IBQuery1.SQL.Text := wSearchSQL;
+       FormDatabaseController.IBQuery1.Open;
+       FormDatabaseController.IBQuery1.First;
+       while not FormDatabaseController.IBQuery1.Eof do
+         begin
+           wObj := wClasse.Create;
+           with wObj as TFuncionario do
+             begin
+               wCod := FormDatabaseController.IBQuery1.Fields[0].AsInteger;
+               wNome := FormDatabaseController.IBQuery1.Fields[1].AsString;
+               wCodDepto := FormDatabaseController.IBQuery1.Fields[2].AsInteger;
+               wDataAdmissao := FormDatabaseController.IBQuery1.Fields[3].AsString;
+             end;
+           wObjList.Add(wObj);
+           FormDatabaseController.IBQuery1.Next;
+         end;
+     end;
+
+  Result := wObjList;
+  FormDatabaseController.IBQuery1.Close;
 end;
 
 function TDatabaseController.getByCod(Cod: Integer; Classe: TClass): TObject;

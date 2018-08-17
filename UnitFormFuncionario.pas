@@ -17,9 +17,9 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
-    procedure Button4Click(Sender: TObject);
+    procedure btInserirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
+    procedure btBuscarClick(Sender: TObject);
     procedure Button6Click(Sender: TObject);
   private
     { Private declarations }
@@ -49,20 +49,17 @@ implementation
 
 {$R *.dfm}
 
-procedure TFormFuncionario.Button3Click(Sender: TObject);
+procedure TFormFuncionario.btBuscarClick(Sender: TObject);
 var
-  wIndex: string;
-  wObj: TObject;
-  wObj2: TFuncionario;
+  FormGrid: TFormGrid;
 begin
   inherited;
-  if inputquery('Busca por codigo', 'Insira o código do funcionario:', wIndex) then
-     wObj := DatabaseController.getByCod(strtoint(wIndex), TFuncionario);
-  with wObj as TFuncionario do
-    Showmessage(wNome);
+  FormGrid := TFormGrid.Create(FormFuncionario);
+  FormGrid.Show;
+  FormGrid.geraGrid(TFuncionario);
 end;
 
-procedure TFormFuncionario.Button4Click(Sender: TObject);
+procedure TFormFuncionario.btInserirClick(Sender: TObject);
 var
   wFuncionario: TFuncionario;
   wIndex: integer;

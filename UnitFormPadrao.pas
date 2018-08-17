@@ -13,11 +13,11 @@ type
     StatusBar1: TStatusBar;
     Panel1: TPanel;
     btAnterior: TButton;
-    Button2: TButton;
+    btProximo: TButton;
     btBuscar: TButton;
-    Button4: TButton;
-    Button5: TButton;
-    Button6: TButton;
+    btInserir: TButton;
+    btExcluir: TButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -30,5 +30,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFormPadrao.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
 
 end.
