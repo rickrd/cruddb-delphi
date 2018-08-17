@@ -14,6 +14,7 @@ object FormGrid: TFormGrid
   OldCreateOrder = False
   Visible = True
   OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 10
   object StringGrid1: TStringGrid
@@ -34,9 +35,6 @@ object FormGrid: TFormGrid
     Height = 29
     Caption = 'ToolBar1'
     TabOrder = 1
-    ExplicitLeft = 128
-    ExplicitTop = 8
-    ExplicitWidth = 150
     object btExcluir: TButton
       Left = 0
       Top = 0

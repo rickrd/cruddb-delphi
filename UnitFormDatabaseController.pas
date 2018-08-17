@@ -29,7 +29,7 @@ type
     procedure Inserir(Objeto: TObject; Classe: TClass);
     function getByCod(Cod: integer; Classe: TClass): TObject;
     function getAllBySearchSql(SearchSQL: string; Classe: TClass): TObjectList;
-    function getAllByTableName (Table: string; Classe: TClass): TObjectList;
+    function getAllByTableName (Classe: TClass): TObjectList;
     procedure deleteByCod (Cod: integer; Classe: TClass);
     constructor Create();
   end;
@@ -71,14 +71,13 @@ var
   wCont: Integer;
   wObj: TObject;
 begin
-  wClasse := Classe;
   wObjList := TObjectList.Create;
   FormDatabaseController.IBQuery1.SQL.Text := SearchSQL;
   FormDatabaseController.IBQuery1.Open;
   FormDatabaseController.IBQuery1.First;
   while not FormDatabaseController.IBQuery1.Eof do
     begin
-      wObj := wClasse.Create;
+      wObj := Classe.Create;
       with wObj as TFuncionario do
         begin
           wCod := FormDatabaseController.IBQuery1.Fields[0].AsInteger;
@@ -93,17 +92,16 @@ begin
   FormDatabaseController.IBQuery1.Close;
 end;
 
-function TDatabaseController.getAllByTableName(Table: string; Classe: TClass): TObjectList;
+function TDatabaseController.getAllByTableName(Classe: TClass): TObjectList;
 var
   wObjList: TObjectList;
   wCont: Integer;
   wObj: TObject;
   wSearchSQL: string;
 begin
-  wClasse := Classe;
   wObjList := TObjectList.Create;
   // condição por classe
-  if wClasse = TFuncionario then
+  if Classe = TFuncionario then
      begin
        wSearchSQL := 'SELECT * FROM funcionario ORDER BY wCod';
        FormDatabaseController.IBQuery1.SQL.Text := wSearchSQL;
@@ -111,7 +109,7 @@ begin
        FormDatabaseController.IBQuery1.First;
        while not FormDatabaseController.IBQuery1.Eof do
          begin
-           wObj := wClasse.Create;
+           wObj := Classe.Create;
            with wObj as TFuncionario do
              begin
                wCod := FormDatabaseController.IBQuery1.Fields[0].AsInteger;
@@ -132,8 +130,7 @@ var
   wObj: TObject;
   wSearchSQL: string;
   begin
-  wClasse := Classe;
-  wObj := wClasse.Create;
+  wObj := Classe.Create;
   //uma condição para cada classe de formulário com acesso á função
   if wClasse = TFuncionario then
      begin
@@ -160,9 +157,9 @@ procedure TDatabaseController.Inserir(Objeto: TObject; Classe: TClass);
 var
   wInsertSQL: string;
   begin
-    wClasse := Classe;
-    with Objeto as TFuncionario do
-        wInsertSQL := format('INSERT INTO funcionario VALUES (%d, %s, %d, %s)',[wCod, quotedstr(wNome), wCodDepto, quotedstr(wDataAdmissao)]);
+    if Classe = TFuncionario then
+       with Objeto as TFuncionario do
+         wInsertSQL := format('INSERT INTO funcionario VALUES (%d, %s, %d, %s)',[wCod, quotedstr(wNome), wCodDepto, quotedstr(wDataAdmissao)]);
     try
     FormDatabaseController.IBQuery1.SQL.Text := wInsertSQL;
     FormDatabaseController.IBQuery1.Open;

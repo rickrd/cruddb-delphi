@@ -14,6 +14,7 @@ type
     btExcluir: TButton;
     btEscolher: TButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -23,6 +24,7 @@ type
 
 var
   FormGrid: TFormGrid;
+  DatabaseController: TDatabaseController;
 
 implementation
 {$R *.dfm}
@@ -34,16 +36,20 @@ begin
   Action := caFree;
 end;
 
+procedure TFormGrid.FormCreate(Sender: TObject);
+begin
+  DatabaseController := TDatabaseController.Create;
+end;
+
 procedure TFormGrid.geraGrid(Classe: TClass);
 var
-  DatabaseController: TDatabaseController;
   wObjList: TObjectList;
   wCont: Integer;
   wObj: TObject;
 begin
   if Classe = TFuncionario then
-     wObj := TFuncionario.Create;
-     wObjList := DatabaseController.getAllByTableName('funcionario', TFuncionario);
+     wObjList := TObjectList.Create;
+     wObjList := DatabaseController.getAllByTableName(TFuncionario);
      StringGrid1.RowCount := wObjlist.Count+1;
      StringGrid1.Cells[0,0] := 'Código';
      StringGrid1.Cells[1,0] := 'Nome';

@@ -14,6 +14,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TFormSplash, FormSplash);
-  Application.CreateForm(TFormFuncionario, FormFuncionario);
   Application.Run;
 end.

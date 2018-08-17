@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnitFormPadrao, Vcl.ExtCtrls,
-  Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ToolWin, UnitFormDatabaseController, UnitFormGrid;
+  Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ToolWin, UnitFormDatabaseController, UnitFormGrid, System.Contnrs;
 
 type
   TFormFuncionario = class(TFormPadrao)
@@ -89,8 +89,8 @@ var
 begin
   inherited;
   FormGrid := TFormGrid.Create(FormFuncionario);
-  FormGrid.Show;
   FormGrid.geraGrid(TFuncionario);
+  FormGrid.Show;
 end;
 
 procedure TFormFuncionario.btExcluirClick(Sender: TObject);
@@ -113,6 +113,9 @@ procedure TFormFuncionario.btInserirClick(Sender: TObject);
 var
   wFuncionario: TFuncionario;
   wIndex: integer;
+  wObjList: TObjectList;
+  wCont: Integer;
+  wObj: TObject;
 begin
   inherited;
   wFuncionario := TFuncionario.Create;
@@ -125,7 +128,18 @@ begin
            wCodDepto := strtoint(edCodDepto.Text);
            wDataAdmissao := datetostr(dtDataAdmissao.Date);
          end;
-       DatabaseController.Inserir(wFuncionario, TFuncionario);
+       wObjList := DatabaseController.getAllByTableName(TFuncionario);
+       for wCont := 0 to wObjList.Count-1 do
+         begin
+           wObj := wObjList.Items[wCont];
+           with wObj as TFuncionario do
+             if wCod = wFuncionario.wCod then
+                // criar metodo update
+                {DatabaseController.Update(wFuncionario, TFuncionario)}
+             else
+               DatabaseController.Inserir(wFuncionario, TFuncionario);
+
+         end;
      end;
 end;
 
@@ -144,5 +158,8 @@ begin
   inherited;
   DatabaseController := TDatabaseController.Create;
 end;
+
+initialization
+registerclass(TFormFuncionario);
 
 end.
