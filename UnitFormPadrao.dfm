@@ -23,7 +23,6 @@ object FormPadrao: TFormPadrao
     Height = 29
     Caption = 'ToolBar1'
     TabOrder = 0
-    ExplicitWidth = 450
     object btAnterior: TButton
       Left = 0
       Top = 0
@@ -71,7 +70,6 @@ object FormPadrao: TFormPadrao
     Width = 377
     Height = 19
     Panels = <>
-    ExplicitWidth = 450
   end
   object Panel1: TPanel
     Left = 0
@@ -80,6 +78,5 @@ object FormPadrao: TFormPadrao
     Height = 190
     Align = alClient
     TabOrder = 2
-    ExplicitWidth = 450
   end
 end

@@ -11,7 +11,10 @@ inherited FormFuncionario: TFormFuncionario
   TextHeight = 10
   inherited ToolBar1: TToolBar
     Width = 376
-    ExplicitWidth = 451
+    ExplicitWidth = 376
+    inherited btAnterior: TButton
+      OnClick = btAnteriorClick
+    end
     inherited btBuscar: TButton
       OnClick = btBuscarClick
     end
@@ -26,12 +29,12 @@ inherited FormFuncionario: TFormFuncionario
     Top = 221
     Width = 376
     ExplicitTop = 221
-    ExplicitWidth = 451
+    ExplicitWidth = 376
   end
   inherited Panel1: TPanel
     Width = 376
     Height = 192
-    ExplicitWidth = 451
+    ExplicitWidth = 376
     ExplicitHeight = 192
     object Label1: TLabel
       Left = 39
@@ -76,25 +79,27 @@ inherited FormFuncionario: TFormFuncionario
       Height = 18
       Anchors = []
       TabOrder = 0
-      ExplicitLeft = 97
+      OnKeyPress = onKeyPress
     end
     object edNome: TEdit
+      Tag = 1
       Left = 75
       Top = 42
       Width = 75
       Height = 18
       Anchors = []
       TabOrder = 1
-      ExplicitLeft = 97
+      OnKeyPress = onKeyPress
     end
     object edCodDepto: TEdit
+      Tag = 2
       Left = 75
       Top = 68
       Width = 75
       Height = 18
       Anchors = []
       TabOrder = 2
-      ExplicitLeft = 97
+      OnKeyPress = onKeyPress
     end
     object dtDataAdmissao: TDateTimePicker
       Left = 75
@@ -105,7 +110,6 @@ inherited FormFuncionario: TFormFuncionario
       Date = 43328.491908333330000000
       Time = 43328.491908333330000000
       TabOrder = 3
-      ExplicitLeft = 97
     end
   end
 end

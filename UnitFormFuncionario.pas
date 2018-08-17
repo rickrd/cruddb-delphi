@@ -22,6 +22,7 @@ type
     procedure btBuscarClick(Sender: TObject);
     procedure Button6Click(Sender: TObject);
     procedure btExcluirClick(Sender: TObject);
+    procedure btAnteriorClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,6 +50,38 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFormFuncionario.btAnteriorClick(Sender: TObject);
+var
+  wObj: TObject;
+  wObj2: TObject;
+  wIndex: integer;
+begin
+  inherited;
+  if trystrtoint(edCod.Text, wIndex) then
+     begin
+
+       wObj := DatabaseController.getByCod(strtoint(edCod.Text), TFuncionario);
+       with wObj as TFuncionario do
+         try
+           wObj2 := DatabaseController.getByCod(wCod-1, TFuncionario);
+
+         finally
+
+         end;
+         {finally
+           with wObj2 as TFuncionario do
+             begin
+               edCod.Text := inttostr(wCod);
+               edNome.Text := wNome;
+               edCodDepto.Text := inttostr(wCodDepto);
+               dtDataAdmissao.Date := strtodate(wDataAdmissao);
+             end;
+         end;}
+
+     end;
+
+end;
 
 procedure TFormFuncionario.btBuscarClick(Sender: TObject);
 var
