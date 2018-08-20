@@ -23,10 +23,15 @@ type
     procedure btExcluirClick(Sender: TObject);
     procedure btAnteriorClick(Sender: TObject);
     procedure btProximoClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure selectObj(Index: integer);
+    procedure btLimparClick(Sender: TObject);
   private
     { Private declarations }
+    wpDado: integer;
   public
     { Public declarations }
+    property Dado: integer read wpDado write wpDado;
   end;
 
   TFuncionario = class
@@ -46,10 +51,22 @@ type
 var
   FormFuncionario: TFormFuncionario;
   DatabaseController: TDatabaseController;
+  FDado: TDado;
 
 implementation
 
 {$R *.dfm}
+
+procedure TFormFuncionario.selectObj(Index: Integer);
+var
+  wObj: TObject;
+  wObjlist: TObjectList;
+begin
+  wObjlist := DatabaseController.getAllByTableName(TFuncionario);
+  wObj := wObjList.Items[Index];
+  with wObj as TFuncionario do
+    edCod.Text := inttostr(12);
+end;
 
 procedure TFormFuncionario.btAnteriorClick(Sender: TObject);
 var
@@ -145,6 +162,14 @@ begin
      end;
 end;
 
+procedure TFormFuncionario.btLimparClick(Sender: TObject);
+begin
+  inherited;
+  edCod.Clear;
+  edNome.Clear;
+  edCodDepto.Clear;
+end;
+
 procedure TFormFuncionario.btProximoClick(Sender: TObject);
 var
   wObj: TObject;
@@ -174,9 +199,32 @@ begin
            edCodDepto.Text := inttostr(wCodDepto);
            dtDataAdmissao.Date := strtodate(wDataAdmissao);
          end;
-
      end;
+end;
 
+procedure TFormFuncionario.FormActivate(Sender: TObject);
+var
+  wObj: TObject;
+  wObjList: TObjectList;
+begin
+  inherited;
+  if FDado.getDado > -1 then
+     begin
+       Dado := FDado.getDado;
+       edCod.Text := 'teste';
+       wObjlist := DatabaseController.getAllByTableName(TFuncionario);
+       wObj := wObjList.Items[Dado];
+       with wObj as TFuncionario do
+         begin
+           edCod.Text := inttostr(wCod);
+           edNome.Text := wNome;
+           edCodDepto.Text := inttostr(wCodDepto);
+           dtDataAdmissao.Date := strtodate(wDataAdmissao);
+         end;
+       FDado.setDado(-1);
+       Dado := FDado.getDado;
+     {FormFuncionario.selectObj(1); }
+     end;
 
 end;
 
@@ -184,6 +232,7 @@ procedure TFormFuncionario.FormCreate(Sender: TObject);
 begin
   inherited;
   DatabaseController := TDatabaseController.Create;
+  FDado := TDado.Create;
 end;
 
 initialization

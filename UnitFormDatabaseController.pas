@@ -35,14 +35,39 @@ type
     constructor Create();
   end;
 
+  TDado = class
+  private
+
+  public
+    constructor Create();
+    procedure setDado(Num: integer);
+    function getDado(): integer;
+  end;
+
 var
   FormDatabaseController: TFormDatabaseController;
   DatabaseController: TDatabaseController;
   wClasse: TClass;
+  Dado: integer;
 
 implementation
 {$R *.dfm}
 uses UnitFormFuncionario;
+
+procedure TDado.setDado(Num: Integer);
+begin
+  Dado := Num;
+end;
+
+function TDado.getDado(): integer;
+begin
+  Result := Dado;
+end;
+
+constructor TDado.Create;
+begin
+  Dado := -1;
+end;
 
 procedure TDatabaseController.Update(Objeto: TObject; Classe: TClass);
 var
@@ -55,7 +80,7 @@ begin
            FormDatabaseController.IBQuery1.SQL.Text := format('UPDATE funcionario SET wNome=%s, wCodDepto=%d, wDataAdmissao=%s WHERE wCod LIKE %d', [quotedstr(wNome), wCodDepto, quotedstr(wDataAdmissao), wCod]);
            FormDatabaseController.IBQuery1.Open;
          finally
-           Showmessage ('sucesso!');
+           Showmessage ('Alterado!');
            FormDatabaseController.IBQuery1.Close;
            FormDatabaseController.IBQuery1.ExecSQL;
            FormDatabaseController.IBTransaction1.CommitRetaining;
@@ -73,7 +98,7 @@ begin
      FormDatabaseController.IBQuery1.SQL.Text := wDeleteSQL;
      FormDatabaseController.IBQuery1.Open;
      finally
-       ShowMessage('Sucesso!');
+       ShowMessage('Deletado!');
        FormDatabaseController.IBQuery1.Close;
        FormDatabaseController.IBQuery1.ExecSQL;
        FormDatabaseController.IBTransaction1.CommitRetaining;
@@ -186,7 +211,7 @@ var
     FormDatabaseController.IBQuery1.Close;
     FormDatabaseController.IBTransaction1.CommitRetaining;
     finally
-      ShowMessage('Success');
+      ShowMessage('Adicionado!');
     end;
   end;
 

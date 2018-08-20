@@ -17,6 +17,7 @@ type
     btBuscar: TButton;
     btInserir: TButton;
     btExcluir: TButton;
+    btLimpar: TButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure onKeyPress(Sender: TObject; var Key: Char);
   private

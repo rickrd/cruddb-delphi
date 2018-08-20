@@ -11,10 +11,10 @@ type
   TFormGrid = class(TForm)
     StringGrid1: TStringGrid;
     ToolBar1: TToolBar;
-    btExcluir: TButton;
     btEscolher: TButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure btEscolherClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,11 +25,18 @@ type
 var
   FormGrid: TFormGrid;
   DatabaseController: TDatabaseController;
+  Dado: TDado;
 
 implementation
 {$R *.dfm}
 
 uses UnitFormFuncionario;
+
+procedure TFormGrid.btEscolherClick(Sender: TObject);
+begin
+  Dado.setDado(StringGrid1.Row-1);
+  Self.Destroy;
+end;
 
 procedure TFormGrid.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -39,6 +46,7 @@ end;
 procedure TFormGrid.FormCreate(Sender: TObject);
 begin
   DatabaseController := TDatabaseController.Create;
+  Dado := TDado.Create;
 end;
 
 procedure TFormGrid.geraGrid(Classe: TClass);

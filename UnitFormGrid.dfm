@@ -35,21 +35,15 @@ object FormGrid: TFormGrid
     Height = 29
     Caption = 'ToolBar1'
     TabOrder = 1
-    object btExcluir: TButton
+    object btEscolher: TButton
       Left = 0
       Top = 0
       Width = 75
       Height = 22
-      Caption = 'Excluir'
-      TabOrder = 0
-    end
-    object btEscolher: TButton
-      Left = 75
-      Top = 0
-      Width = 75
-      Height = 22
       Caption = 'Escolher'
-      TabOrder = 1
+      Default = True
+      TabOrder = 0
+      OnClick = btEscolherClick
     end
   end
 end
