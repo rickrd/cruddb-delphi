@@ -18,6 +18,7 @@ type
     btInserir: TButton;
     btExcluir: TButton;
     btLimpar: TButton;
+    Panel2: TPanel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure onKeyPress(Sender: TObject; var Key: Char);
   private
