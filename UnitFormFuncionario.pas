@@ -154,7 +154,7 @@ begin
              if wCod = wFuncionario.wCod then
                 begin
                   wUpdate := true;
-                DatabaseController.Update(wFuncionario, TFuncionario);
+                  DatabaseController.Update(wFuncionario, TFuncionario);
                 end;
          end;
        if wUpdate = false then
@@ -223,7 +223,6 @@ begin
          end;
        FDado.setDado(-1);
        Dado := FDado.getDado;
-     {FormFuncionario.selectObj(1); }
      end;
 
 end;
