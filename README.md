@@ -7,5 +7,5 @@ CRUD DB DELPHI: This project's interface language is PT/BR, was developed in RAD
 * Database Management System (DBMS).
 
 It uses Firebird database to store objects information.
-If you want to test the project, you need to configure the database path, user and password.
+If you want to test the project, you need to create the database (see: sql.sql), configure the database path, user and password.
 Development time: ~12h.
