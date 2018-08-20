@@ -15,6 +15,9 @@ inherited FormFuncionario: TFormFuncionario
     inherited btAnterior: TButton
       OnClick = btAnteriorClick
     end
+    inherited btProximo: TButton
+      OnClick = btProximoClick
+    end
     inherited btBuscar: TButton
       OnClick = btBuscarClick
     end

@@ -27,6 +27,7 @@ type
 
   public
     procedure Inserir(Objeto: TObject; Classe: TClass);
+    procedure Update(Objeto: TObject; Classe: TClass);
     function getByCod(Cod: integer; Classe: TClass): TObject;
     function getAllBySearchSql(SearchSQL: string; Classe: TClass): TObjectList;
     function getAllByTableName (Classe: TClass): TObjectList;
@@ -42,6 +43,25 @@ var
 implementation
 {$R *.dfm}
 uses UnitFormFuncionario;
+
+procedure TDatabaseController.Update(Objeto: TObject; Classe: TClass);
+var
+  wObj: TObject;
+begin
+  if Classe = TFuncionario then
+     with Objeto as TFuncionario do
+       begin
+         try
+           FormDatabaseController.IBQuery1.SQL.Text := format('UPDATE funcionario SET wNome=%s, wCodDepto=%d, wDataAdmissao=%s WHERE wCod LIKE %d', [quotedstr(wNome), wCodDepto, quotedstr(wDataAdmissao), wCod]);
+           FormDatabaseController.IBQuery1.Open;
+         finally
+           Showmessage ('sucesso!');
+           FormDatabaseController.IBQuery1.Close;
+           FormDatabaseController.IBQuery1.ExecSQL;
+           FormDatabaseController.IBTransaction1.CommitRetaining;
+         end;
+       end;
+end;
 
 procedure TDatabaseController.deleteByCod(Cod: Integer; Classe: TClass);
 var

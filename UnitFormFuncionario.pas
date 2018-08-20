@@ -20,9 +20,9 @@ type
     procedure btInserirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btBuscarClick(Sender: TObject);
-    procedure Button6Click(Sender: TObject);
     procedure btExcluirClick(Sender: TObject);
     procedure btAnteriorClick(Sender: TObject);
+    procedure btProximoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -54,33 +54,32 @@ implementation
 procedure TFormFuncionario.btAnteriorClick(Sender: TObject);
 var
   wObj: TObject;
-  wObj2: TObject;
+  wObjList: TObjectList;
   wIndex: integer;
+  wCont: integer;
 begin
   inherited;
-  if trystrtoint(edCod.Text, wIndex) then
+  if (trystrtoint(edCod.Text, wIndex)) and (strtoint(edCod.Text) <> 0) then
      begin
-
-       wObj := DatabaseController.getByCod(strtoint(edCod.Text), TFuncionario);
-       with wObj as TFuncionario do
-         try
-           wObj2 := DatabaseController.getByCod(wCod-1, TFuncionario);
-
-         finally
-
+       wObjList := DatabaseController.getAllByTableName(TFuncionario);
+       for wCont := 0 to wObjList.Count-1 do
+         begin
+           wObj := wObjList.Items[wCont];
+           with wObj as TFuncionario do
+             if wCod = strtoint(edCod.Text) then
+                if wObjList.IndexOf(wObj) > 0 then
+                   wIndex := wObjList.IndexOf(wObj);
          end;
-         {finally
-           with wObj2 as TFuncionario do
-             begin
-               edCod.Text := inttostr(wCod);
-               edNome.Text := wNome;
-               edCodDepto.Text := inttostr(wCodDepto);
-               dtDataAdmissao.Date := strtodate(wDataAdmissao);
-             end;
-         end;}
-
+       if wIndex-1 >= 0 then
+          wObj := wObjList.Items[wIndex-1];
+       with wObj as TFuncionario do
+         begin
+           edCod.Text := inttostr(wCod);
+           edNome.Text := wNome;
+           edCodDepto.Text := inttostr(wCodDepto);
+           dtDataAdmissao.Date := strtodate(wDataAdmissao);
+         end;
      end;
-
 end;
 
 procedure TFormFuncionario.btBuscarClick(Sender: TObject);
@@ -116,8 +115,10 @@ var
   wObjList: TObjectList;
   wCont: Integer;
   wObj: TObject;
+  wUpdate: boolean;
 begin
   inherited;
+  wUpdate := false;
   wFuncionario := TFuncionario.Create;
   if trystrtoint(edCod.Text, wIndex) and trystrtoint (edCodDepto.Text, wIndex) then
      begin
@@ -134,23 +135,49 @@ begin
            wObj := wObjList.Items[wCont];
            with wObj as TFuncionario do
              if wCod = wFuncionario.wCod then
-                // criar metodo update
-                {DatabaseController.Update(wFuncionario, TFuncionario)}
-             else
-               DatabaseController.Inserir(wFuncionario, TFuncionario);
-
+                begin
+                  wUpdate := true;
+                DatabaseController.Update(wFuncionario, TFuncionario);
+                end;
          end;
+       if wUpdate = false then
+          DatabaseController.Inserir(wFuncionario, TFuncionario);
      end;
 end;
 
-procedure TFormFuncionario.Button6Click(Sender: TObject);
+procedure TFormFuncionario.btProximoClick(Sender: TObject);
 var
-  FormGrid: TFormGrid;
+  wObj: TObject;
+  wObjList: TObjectList;
+  wCont: Integer;
+  wIndex: integer;
 begin
   inherited;
-  FormGrid := TFormGrid.Create(FormFuncionario);
-  FormGrid.Show;
-  FormGrid.geraGrid(TFuncionario);
+  if (trystrtoint(edCod.Text,wIndex)) then
+     begin
+       wObjList := DatabaseController.getAllByTableName(TFuncionario);
+       for wCont := 0 to wObjList.Count-1 do
+         begin
+           wObj := wObjList.Items[wCont];
+           with wObj as TFuncionario do
+             if wCod = strtoint(edCod.Text) then
+                begin
+                  wIndex := wObjList.IndexOf(wObj);
+                end;
+         end;
+       if wIndex+1 < wObjList.Count then
+          wObj := wObjList.Items[wIndex+1];
+       with wObj as TFuncionario do
+         begin
+           edCod.Text := inttostr(wCod);
+           edNome.Text := wNome;
+           edCodDepto.Text := inttostr(wCodDepto);
+           dtDataAdmissao.Date := strtodate(wDataAdmissao);
+         end;
+
+     end;
+
+
 end;
 
 procedure TFormFuncionario.FormCreate(Sender: TObject);
